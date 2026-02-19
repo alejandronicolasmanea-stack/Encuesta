@@ -32,11 +32,28 @@ preguntas = [
         "correcta": "Mi Lucha"
     },
     {
-        "texto": "¿Eeeen qué año se lanzó la Web 1.0?",
-        "opciones": ["1983", "1990", "2005"],
-        "correcta": "1990"
+        "texto": "¿Qué inventó Alan Turing?",
+        "opciones": ["La Bombe", "Apple", "Tesla", "General Motors"],
+        "correcta": "La Bombe"
     },
-    
+
+    {
+        "texto": "¿Qué piloto de la F1 se quedó a 3 puntos de ganar el mundial?",
+        "opciones": ["Max Verstappen", "Fernando Alonso", "Lewis Hamilton"],
+        "correcta": "Max Verstappen"
+    },
+
+    {
+        "texto": "¿Quién es el actual entrenador del Benfica?",
+        "opciones": ["Pep Guardiola", "Carlo Ancelotti", "José Mourinho"],
+        "correcta": "José Mourinho"
+    },
+
+    {
+        "texto": "¿Qué es Qwerty?",
+        "opciones": ["Un teclado único", "Un tipo de mecanografía", "Un diseño de teclado"],
+        "correcta": "Un diseño de teclado"
+    }
 ]
 
 # Configuración visual de la página
@@ -78,13 +95,22 @@ if boton_enviar:
 
     # Calculamos la nota sobre 10
     nota = (aciertos / total) * 10
+    nota_redondeada = round(nota, 2)
+    st.metric(label="Nota Final", value=nota_redondeada)
 
     # Mostramos el resultado con colores
     st.divider()
-    st.header(f"Resultado final: {nota} / 10")
+    st.header(f"Resultado final: {nota_redondeada} / 10")
 
-    if nota >= 5:
+    if nota >=5 and nota <=7:
         st.success(f"¡Felicidades! Has aprobado con {aciertos} aciertos.")
+        st.balloons() # ¡Efecto de globos!
+    elif nota >= 0 and nota <= 4:
+        st.warning("Estudia chanval!.")
+    else:
+        st.success(f"Has sacado un {nota_redondeada}. ¡Ole Guacamole!")
+        st.balloons() # ¡Efecto de globos!
+
         st.balloons() # ¡Efecto de globos!
     else:
         st.error(f"Has sacado un {nota}. ¡Toca estudiar un poco más!")
